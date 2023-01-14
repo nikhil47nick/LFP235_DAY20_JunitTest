@@ -1,7 +1,5 @@
 package com.bridgelabz.Day20;
 
-import junit.framework.TestCase;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,19 +8,24 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 
+import static junit.framework.TestCase.assertEquals;
+
+
 @RunWith(Parameterized.class)
 public class EmailTest {
     private String email;
     private String expected;
-    private
+    private UserRegistration userRegistration;
 
-     EmailTest(String email, String expected){
-        super();
+     public EmailTest(String email, String expected){
         this.email = email;
         this.expected = expected;
     }
 
-
+    @Before
+    public void initialize() {
+        userRegistration = new UserRegistration();
+    }
 
     @Parameterized.Parameters
     public static Collection input(){
@@ -39,8 +42,10 @@ public class EmailTest {
 
     @Test
     public void testEmail(){
-        UserRegistration ur = new UserRegistration();
-        Assert.assertEquals(expected,ur.emailCheck(email));
+        System.out.println("Parameterized mail is : " + email);
+        String result = userRegistration.emailCheck(email);
+        assertEquals(expected,result);
+
     }
 
 }
